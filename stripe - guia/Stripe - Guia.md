@@ -126,6 +126,9 @@ dato extra: en **PROJECT/src/views/index.hbs** aun no digitamos nada de codigo
     <h1>TRANCAS Y BARRANCAS!!</h1>
     <h2> {{title}} </h2>
     <p> {{message}} </p>
+
+    {{{ body }}} <!--Esto lo agregue tarde tal vez te cause problemas-->
+
 </body>
 </html>
 ```
@@ -173,17 +176,50 @@ module.exports = router;
 
 ### Archivos Estaticos
 
->18. Seguidamente para poder usar archivos css y imagenes entre otros crearemos una carpeta llamada public `src/public`
+>18. Seguidamente para poder usar archivos css y imagenes entre otros crearemos una carpeta llamada public y ya una ruta css por siacaso (**`PROJECT/src/public/styles/main.css`**)
 
->19. Ahora en `src/index.js` haremos lo siguiente en //Static files
+>19. Ahora en (**`PROJECT/src/index.js`**) haremos lo siguiente en //Static files
 
 ```js
 //Static files
-app.use(express.staic(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 ```
 
+> 20. Seguidamente agregamos el link en (**`PROJECT/crs/views/layouts/main.hbs`**)
 
+```js
+<link rel="stylesheet" href="/styles/main.css">
+```
+
+> 21. un css en (**`PROJECT/src/public/styles/main.css`**)
+
+```css
+body {
+    background: #252526;
+    color: white;
+}
+```
+
+> 22. y un h1 en (**`PROJECT/src/views/index.hbs`**)
+
+```html
+<h1>El index de views</h1>
+```
+
+Y ya estaría.
+
+![imagen](./img/image_2.png)
+
+### Diseño
 
 ## Desarrollo del proyecto
 
 - Lo primero que hice es crear el servidor con Express
+
+> Falata por hacer:
+
+- agregar link de bootstrap diferente
+- agrego el navbar
+- imagen y formulario de compra
+
+
