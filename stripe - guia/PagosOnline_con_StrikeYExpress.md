@@ -36,7 +36,7 @@ Y luego lo activamos
 
     venv\Scripts\activate.bat
 
-### Creación del servidor con Express
+### Empezamos a crear el servidor con Express
 
 >2. creamos un proyecto de nodejs haci que lo iniciamos `npm init -y`
 
@@ -44,9 +44,9 @@ Y luego lo activamos
 
 >4. Y luego la libreria o mudulo de express-handlebars. Es para el manejo de las plantillas. Instalamos con `npm install express-handlebars@3.0.2` instalaremos exclusivamente la versión 3.0.2 por que con la version reciente hay problemas de compatibilidad.
 
->4. Creamos una carpeta src y dentro creamos un index.js (**`PROJECT/src/index.js`**).
+>5. Creamos una carpeta src y dentro creamos un index.js (**`PROJECT/src/index.js`**).
 
->5. empezamos con las bases del servidor (**`PROJECT/src/index.js`**).
+>6. empezamos con las bases del servidor (**`PROJECT/src/index.js`**).
 
 ```js
 const express = require('express');
@@ -59,9 +59,9 @@ app.listen(3000, () => {
     console.log('server on port', 3000);
 });
 ```
-> 6. Veremos que ya esta funcuionando con `node src/index.js`. Ahora solo faltan las vistas
+> 7. Veremos que ya esta funcuionando con `node src/index.js`. Ahora solo faltan las vistas
 
-> 6. Ahora crearemos la estructura de nuestro servidor
+> 8. Ahora crearemos la estructura de nuestro servidor
 
 primero creamos la carpeta **views** y dentro un archivo **index.hbs** (**`PROJECT/src/views/index.hbs`**)
 
@@ -71,92 +71,90 @@ Luego dentro de **views** creamos las siguientes carpetas:
 
 y **layouts**, tambien dentro layouts un **main.hbs** este seria el layout de /views/index.js (**`PROJECT/crs/views/layouts/main.hbs`**)
 
-> 7. hecho esto, en (**`PROJECT/crs/index.js`**) haremos lo siguiente:
+> 9. hecho esto, en (**`PROJECT/crs/index.js`**) haremos lo siguiente:
 
 ```js
-
-```
-
-
-
-
-
-
-
-
-
-> 6. creamos una vista con express-handlebars
-
-```js
-const express = require('express');
-const expbhs = require('express-handlebars');
-
 //initlalizations
+const express = require('express');
+const exphbs = require('express-handlebars');
+const path = require('path');
 const app = express();
 
-//Settings
-app.engine('.hbs', expbhs({
+// Creare Middleware
+app.set('views', path.join(__dirname, 'views')); 
 
-}));
+//Settings
+ app.engine('.hbs', exphbs({
+     defaultLayout: 'main',
+     layoutsDir: path.join(app.get('views'), 'layouts'),
+     extname: '.hbs'
+ }));
+app.set('view engine', 'hbs');
+
+// Routes
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
+app.get('/about', (req, res) => {
+    res.render('index', { 
+        title: 'Mi aplicación', 
+        message: '¡Bienvenido a mi aplicación!' 
+    });
+});
 
 //start server
 app.listen(3000, () => {
     console.log('server on port', 3000);
 });
 ```
-> 7. Hoara crearemos una carpeta llamada `views` para que node sepa donde estan mis archivos. para eso creamos en **`index.js`** lo siguiente en //settings
 
-```js
-//equerimos
-const path = require('path');
+> 10. ahora esto en (**`PROJECT/src/views/layouts/main.hbs`**)
 
-//settings
-app.set('views', path.join(__dirname, 'views'));
+dato extra: en **PROJECT/src/views/index.hbs** aun no digitamos nada de codigo
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>TRANCAS Y BARRANCAS!!</h1>
+    <h2> {{title}} </h2>
+    <p> {{message}} </p>
+</body>
+</html>
 ```
->8. ahora creamos las carpetas `layouts` y `partials` en la carpera `views`. Esto vendria a ser nuesto motor de plantillas
+Este es el resultado que tenemos hasta ahora. Sin errores todo correcto
 
->9. Luego ceamos un archivo llamado `index.hbs` en la carpeta `views`
+![image](./img/image_1.png)
 
->10. Seguidamente le daremos a index.hgs un layout para ello creaemos `main.hbs` en la capeta `layouts`
+### Rutas
 
->11. luego en `index,js` agegamos el dafault main
+> 11. A ordenar las rutas
 
-```js
-//Settings
-app.engine('.hbs', expbhs({
-    defaultLayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    layoutsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs'
-}));
-```
-
->12. Hora vermos como subir datos a nuestro sevidor. Y para ello haremos lo siguiente en `index.js` en //middleware
+>12. Hora vermos como subir datos a nuestro sevidor. Y para ello haremos lo siguiente en (**`PROJECT/src/index.js`**) en //middleware
 
 ```js
 //Middleware
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 ```
->13. Hora crearemos las rutas del servidor crearemos la carpeta `routes` en la carpeta `src` y dentro de `routes` creamos `index.js`
 
->14. Hoar haremos lo siguiente en `src/index.js` en //Routes
+> 13. Ahora crearemos la carpeta routes y dentro de esa carpeta un index.js para las rutas del servidor (**`PROJECT/src/routes/index.js`**)
+
+> 14. En (**`PROJECT/src/index.js`**) haremos lo siguiente.
 
 ```js
 //Routes
 app.use(require('./routes/index.js'));
 ```
 
->15. Seguidamente para poder usar archivos css y imagenes entre otros crearemos una carpeta llamada public `src/public`
-
->16. Ahora en `src/index.js` haremos lo siguiente en //Static files
-
-```js
-//Static files
-app.use(express.staic(path.join(__dirname, 'public')));
-```
-
->17. Ahoar haremos los requerimientos en `routes/index,js`
+>15. Ahora haremos los requerimientos en (**`PROJECT/src/routes/index.js`**). Y en vez de `app.get` usaremos `router.get`
 
 ```js
 const { Router } = require('express');
@@ -168,6 +166,23 @@ router.get('/', (req, res) => {
 
 module.exports = router;
 ```
+
+> 16. Ahora lo ideal es trasladar toda las rutas //Routes a (**`PROJECT/src/routes/index.js`**) de (**`PROJECT/src/index.js`**) y dejas solo esto: `app.use(require('./routes/index.js'));`
+
+> 17. **Si hemos llegado a este punto la web debería de estar funcionando correctamente con todas las rutas**
+
+### Archivos Estaticos
+
+>18. Seguidamente para poder usar archivos css y imagenes entre otros crearemos una carpeta llamada public `src/public`
+
+>19. Ahora en `src/index.js` haremos lo siguiente en //Static files
+
+```js
+//Static files
+app.use(express.staic(path.join(__dirname, 'public')));
+```
+
+
 
 ## Desarrollo del proyecto
 

@@ -10,8 +10,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 //Middleware
-//app.use(express.urlencoded({extended: false}));
-//app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 
 //Static files
@@ -26,22 +26,8 @@ app.set('views', path.join(__dirname, 'views'));
  }));
 app.set('view engine', 'hbs');
 
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
-
-app.get('/about', (req, res) => {
-    res.render('index', { 
-        title: 'Mi aplicación', 
-        message: '¡Bienvenido a mi aplicación!' 
-    });
-});
-
-
 //Routes
-//app.use(require('./routes/index.js'));
+app.use(require('./routes/index.js'));
 
 //start server
 app.listen(3000, () => {
