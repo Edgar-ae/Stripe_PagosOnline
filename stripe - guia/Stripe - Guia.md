@@ -8,15 +8,29 @@ Este proyecto es de el canal Fazt en YouTube y nos sirve para hacer pagos online
 
 ## Informacion importante
 
-- Utilize un **entorno virtual** (venv)
+- El motor de plantillas que use es `Handlebars`.
 
 - Utilice **express-handlebars**. y este es una librería útil para construir aplicaciones web dinámicas con Node.js y Express, ya que te permite crear vistas HTML reutilizables y mantener la separación de preocupaciones en tu código. (es una librería de plantillas). (tube problemas, solo me funciono la verson 3.0.2)
 
+### Herramientas usadas
+
+- **node.js**
+
+- **Entorno virtual venv**
+
+- **Express.js**
+
+- **express-handlebars**
+
+- **nodemon**
 
 
- ### bibiografia
 
-[link]()
+### bibiografia
+
+[Fazt video](https://youtu.be/o9eij8FEvuA)
+
+[Doc completa de nodemon](https://github.com/remy/nodemon#usage)
 
 ## Linea de tienpo
 
@@ -210,16 +224,86 @@ Y ya estaría.
 
 ![imagen](./img/image_2.png)
 
+### Nodemon
+
+> 23. Instalaremos nodemon con `npm install --save-dev nodemon` o `npm i nodemon -D` es lo mismo cualquiera de los dos. Esta es una instalacion local, es decir se instala solo el la carpeta de mi proyecto y no en todo el sistema.
+
+> 24. Ahora que nodemon ya esta instalado lo usaremos con `npx nodemon src/index.js` es lo mismo que hariamos con (node index.js) en consola.
+
 ### Diseño
+
+> Framework de css bootstrap en nuestro caso usaremos estilos de bootstap alternativas y para eso busamos en nuestro vabegador [bootswatch](https://bootswatch.com/)
+
+copiare la url de los estilos .css  de **Sandstone**
+
+y lo pegaremos en una etiqueta **Link** en nuestro archivo (**`PROJECT/src/public/styles/main.css`**)
+![image](./img/image_3.png)
+
+#### navbar
+
+> 25. en (**`PROJECT/src/views/layouts/main.hbs`**)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/main.css"> <!--por el momento aqui solo esta el color del fondo-->
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary p-2">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                Software Store
+            </a>
+        </div>
+    </nav>
+
+    <div class="container p-4">
+        {{{ body }}}
+    </div>
+    
+</body>
+</html>
+```
+#### body
+
+> 26. Y en (**`PROJECT/src/views/index.hbs`**)
+
+```html
+<div class="row">
+    <div class="col-md mx-auto" >
+        <div class="card d-block mx-auto" style="width: 50%;">
+            <div class="mx-auto text-center" >
+                <img src="/img/software.png" alt="" >
+            </div>
+            <div class="card-body">
+                <h2>30$</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni rem accusantium earum sint odit eligendi. Natus nisi nesciunt ullam quidem.</p>
+            </div>
+            <div class="card-footer container-fluid">
+                <button class="btn btn-dark col-sm-12">
+                    Buy
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+```
+> Y ya estaria. Ahora corriendo el servidor con `npx nodemon src/index.js` podremos ver los cambios
+
+![imagen](./img/image_5.png)
+
+### Stripe login
 
 ## Desarrollo del proyecto
 
-- Lo primero que hice es crear el servidor con Express
-
 > Falata por hacer:
 
-- agregar link de bootstrap diferente
-- agrego el navbar
-- imagen y formulario de compra
+- login en stripe
 
 
