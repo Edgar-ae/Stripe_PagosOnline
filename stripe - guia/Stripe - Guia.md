@@ -2,9 +2,11 @@
 
 Este proyecto es de el canal Fazt en YouTube y nos sirve para hacer pagos online usando Strike con un Servidor llamado Express. [Fazt video youtube](https://youtu.be/o9eij8FEvuA?list=PLKP3VSziSreOV5KR4FYsNfMUoSQ8jZ0Rt)
 
+> **Importante: El proyecto fue detenido antes de la aplicación de Stripe, ya que Stripe no está disponible para algunos países y entre ellos está Perú.**
+
 ## Capturas de referancia
 
-![image](./img/)
+![image](./img/image_6.jpg)
 
 ## Informacion importante
 
@@ -299,6 +301,8 @@ y lo pegaremos en una etiqueta **Link** en nuestro archivo (**`PROJECT/src/publi
 ![imagen](./img/image_5.png)
 
 ### Stripe login
+
+> **Importante: El proyecto fue detenido antes de la aplicación de Stripe, ya que Stripe no está disponible para algunos países y entre ellos está Perú.**
 
 ## Desarrollo del proyecto
 
